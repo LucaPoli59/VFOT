@@ -1,0 +1,186 @@
+{
+    "general": {
+        "title": "--{E-150--O-adam--LR-0.001--PT-0--ES-0}--{S-M--L-60--FS-False--P-False}--19.01_11-07-22",
+        "creation_date": "19.01_11-07-22"
+    },
+    "feature_df": {
+        "feature_list": [
+            "Stock_Price",
+            "RV",
+            "IV",
+            "RV_Long_Term",
+            "Volume",
+            "PE",
+            "Trend",
+            "DtE",
+            "DtD",
+            "HML",
+            "SMB",
+            "MKR",
+            "MK_IV",
+            "RFR",
+            "INFL"
+        ],
+        "feature_pct_change": {
+            "Stock_Price": true,
+            "RV": true,
+            "IV": true,
+            "RV_Long_Term": true,
+            "Volume": true,
+            "PE": true,
+            "Trend": true,
+            "DtE": false,
+            "DtD": false,
+            "HML": false,
+            "SMB": false,
+            "MKR": false,
+            "MK_IV": true,
+            "RFR": true,
+            "INFL": true
+        },
+        "feature_smoothing": {
+            "Stock_Price": true,
+            "RV": true,
+            "IV": true,
+            "RV_Long_Term": true,
+            "Volume": true,
+            "PE": true,
+            "Trend": true,
+            "DtE": false,
+            "DtD": false,
+            "HML": false,
+            "SMB": false,
+            "MKR": false,
+            "MK_IV": true,
+            "RFR": true,
+            "INFL": true
+        },
+        "feature_smoothing_window": 11,
+        "start": "00.00_01-01-11",
+        "end": "00.00_01-06-22",
+        "feature_compute_window": 5,
+        "feature_selection": false,
+        "scaler_type": "M",
+        "pca": false,
+        "outliers_threshold": 0.3
+    },
+    "option_df": {
+        "trading_df_range_strike": 70,
+        "iv_file_path": "F:\\appunti\\tesi\\dataset\\option_refined\\volatility_custom_e100.csv"
+    },
+    "prediction:": {
+        "prediction_step": 5,
+        "sequence_len": 60,
+        "train_size": 0.9,
+        "validation_size": 0.05,
+        "train_validation_size": 0.9500000000000001
+    },
+    "trading": {
+        "trading_holding_period": 5,
+        "TRADING_STRATEGY_THRESHOLD": 0.3,
+        "trading_strike_straddle": {
+            "main": 100
+        },
+        "trading_strike_strangle": {
+            "main": {
+                "left": {
+                    "1": 98,
+                    "-1": 94
+                },
+                "right": {
+                    "1": 102,
+                    "-1": 106
+                }
+            }
+        },
+        "trading_strike_butterfly": {
+            "main": 100,
+            "coverage": {
+                "left": {
+                    "1": 90,
+                    "-1": 94
+                },
+                "right": {
+                    "1": 110,
+                    "-1": 106
+                }
+            }
+        },
+        "trading_strike_iron_condor": {
+            "main": {
+                "left": {
+                    "1": 96,
+                    "-1": 96
+                },
+                "right": {
+                    "1": 104,
+                    "-1": 104
+                }
+            },
+            "coverage": {
+                "left": {
+                    "1": 76,
+                    "-1": 84
+                },
+                "right": {
+                    "1": 124,
+                    "-1": 116
+                }
+            }
+        },
+        "trading_hedging_spread": {
+            "straddle": 0.3,
+            "strangle": 0.3,
+            "butterfly": 0.3,
+            "iron_condor": 0.3
+        }
+    },
+    "model": {
+        "metrics": {
+            "Train": {
+                "Accuracy": {
+                    "LSTM": 0.7562338779019776
+                }
+            },
+            "Valid": {
+                "Accuracy": {
+                    "LSTM": 0.3798449612403101
+                }
+            },
+            "Test": {
+                "Accuracy": {
+                    "LSTM": 0.4230769230769231
+                }
+            }
+        },
+        "training_time": 1678.036971,
+        "configuration": {
+            "hyperparameter": {
+                "loss_function": "<tensorflow.python.keras.losses.CategoricalCrossentropy object at 0x00000253FDF9C820>",
+                "epochs": 150,
+                "batch_size": 16,
+                "optimizer": "adam",
+                "pre_train_epochs": "0",
+                "early_stopping_patience": 0,
+                "metrics_main": "[<tensorflow.python.keras.metrics.CategoricalAccuracy object at 0x00000253FDF9C670>]"
+            },
+            "summary": [
+                "Model: \"sequential\"",
+                "________________________________________________________________________________",
+                "Layer (type)                        Output Shape                    Param #     ",
+                "================================================================================",
+                "lstm1 (LSTM)                        (None, 60, 15)                  1860        ",
+                "________________________________________________________________________________",
+                "lstm2 (LSTM)                        (None, 60, 8)                   768         ",
+                "________________________________________________________________________________",
+                "out (LSTM)                          (None, 60, 3)                   144         ",
+                "================================================================================",
+                "Total params: 2,772",
+                "Trainable params: 2,772",
+                "Non-trainable params: 0",
+                "________________________________________________________________________________"
+            ],
+            "model_settings": "{'lstm1': {'type': <class 'tensorflow.python.keras.layers.recurrent.LSTM'>, 'units': 15, 'r_seq': True, 'gaussian': 0, 'drop': 0, 'rc_drop': 0}, 'lstm2': {'type': <class 'tensorflow.python.keras.layers.recurrent.LSTM'>, 'units': 8, 'r_seq': True, 'gaussian': 0, 'drop': 0, 'rc_drop': 0}, 'out': {'type': <class 'tensorflow.python.keras.layers.recurrent.LSTM'>, 'units': 3, 'r_seq': True, 'gaussian': 0, 'drop': 0, 'rc_drop': 0, 'act': <function softmax at 0x00000253F6B05AB0>}}"
+        }
+    }
+}
